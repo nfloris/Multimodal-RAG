@@ -1,0 +1,47 @@
+# --- CORE & UTILS ---
+python-dotenv
+numpy<2.0.0
+requests
+uuid
+
+# --- MACHINE LEARNING & EMBEDDINGS ---
+torch
+torchvision
+torchaudio
+sentence-transformers
+accelerate
+
+# --- LANGCHAIN STACK ---
+langchain
+langchain-community
+langchain-core
+langchain-classic
+langchain-astradb
+langchain-groq
+langchain-huggingface
+
+# --- DOCUMENT PROCESSING (UNSTRUCTURED) ---
+unstructured
+unstructured[pdf]
+untructured-pytesseract
+unstructured-inference
+pdfminer.six
+pi-heif
+pillow>=11.1.0
+pytesseract
+pdf2image
+
+# --- MULTIMODAL (QWEN2-VL) ---
+transformers
+qwen_vl_utils
+
+# --- JUPYTER SUPPORT ---
+ipykernel
+
+# --- INDEXING ---
+rank_mb25
+
+# --- TESTING ---
+pytest
+
+#
