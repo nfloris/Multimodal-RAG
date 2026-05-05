@@ -23,7 +23,7 @@ langchain-huggingface
 # --- DOCUMENT PROCESSING (UNSTRUCTURED) ---
 unstructured
 unstructured[pdf]
-untructured-pytesseract
+unstructured-pytesseract
 unstructured-inference
 pdfminer.six
 pi-heif
@@ -39,7 +39,7 @@ qwen_vl_utils
 ipykernel
 
 # --- INDEXING ---
-rank_mb25
+rank_bm25
 
 # --- TESTING ---
 pytest
