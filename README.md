@@ -26,6 +26,7 @@ The RAG strategy implemented follows these steps:
     ```bash
     py -3.11 -m venv venv
     source venv/Scripts/activate  # On Windows
+    venv\Scripts\Activate.ps1     # On Windows, with Powershell
     # source venv/bin/activate    # On macOS/Linux
     ```
 
