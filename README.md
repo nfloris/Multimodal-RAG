@@ -24,7 +24,7 @@ The RAG strategy implemented follows these steps:
 
 2.  **Create a Virtual Environment:**
     ```bash
-    python -3.11.15 -m venv venv
+    py -3.11 -m venv venv
     source venv/Scripts/activate  # On Windows
     # source venv/bin/activate    # On macOS/Linux
     ```
