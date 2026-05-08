@@ -1,0 +1,13 @@
+# Ignore all directories
+*/
+
+# Re-include content folder
+!content/
+
+# Re-include everything inside content
+!content/**
+
+# Ignore common Python artifacts
+*.pyc
+__pycache__/
+.ipynb_checkpoints/

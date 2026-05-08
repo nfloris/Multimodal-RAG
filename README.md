@@ -47,16 +47,16 @@ The RAG strategy implemented follows these steps:
         * Download from [https://github.com/UB-Mannheim/tesseract/wiki](https://github.com/UB-Mannheim/tesseract/wiki) (for Windows).
         * Install and add the installation directory (e.g., `C:\Program Files\Tesseract-OCR`) to your system's `PATH`.
 
-5.  **Set up AstraDB:**
-    * Create an AstraDB instance and a database.
-    * Obtain your AstraDB API Endpoint and Application Token.
-    * Set these as environment variables (e.g., in a `.env` file):
-        ```
-        ASTRA_DB_API_ENDPOINT="your_api_endpoint"
-        ASTRA_DB_APPLICATION_TOKEN="your_application_token"
-        ASTRA_DB_KEYSPACE="your_keyspace" # Optional
-        OPENAI_API_KEY="your_openai_api_key" # If using OpenAI embeddings/LLMs
-        ```
+5.  **Set up QDrant:**
+    To manage embeddings, we create a proper vector database istance locally using QDrant:
+
+    ```bash
+    docker run -d --name qdrant -p 6333:6333 -p 6334:6334 \
+        -v $(pwd)/qdrant_storage:/qdrant/storage \
+        qdrant/qdrant
+    ```
+
+    REST dashboard: <http://localhost:6333/dashboard>.
 
 ## Usage
 

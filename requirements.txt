@@ -1,47 +1,76 @@
+# -----------------------------------------------------------------------------
+# RAG Pipeline
+# -----------------------------------------------------------------------------
+# Python note: use Python 3.10 or 3.11 for best compatibility with torch,
+# transformers, unstructured-inference, and qwen-vl-utils.
+#
+# PyTorch note: for GPU/CUDA, install torch/torchvision/torchaudio from the
+# official PyTorch selector first, then install this file. CPU wheels also work
+# but Qwen-VL models will be slow.
+# -----------------------------------------------------------------------------
+
 # --- CORE & UTILS ---
-python-dotenv
+python-dotenv>=1.0.1
 numpy<2.0.0
-requests
-uuid
+requests>=2.32.0
+tqdm>=4.66.0
+pydantic>=2.7.0
+ipython>=8.20.0
 
 # --- MACHINE LEARNING & EMBEDDINGS ---
 torch
 torchvision
 torchaudio
-sentence-transformers
-accelerate
+accelerate>=1.6.0
+sentence-transformers>=3.4.1
+FlagEmbedding>=1.3.4
+
+# --- HUGGING FACE MODEL DOWNLOAD / LOCAL INFERENCE ---
+transformers>=4.51.0
+huggingface-hub>=0.30.0
+safetensors>=0.5.0
+einops>=0.8.0
+protobuf>=5.26.0
+tokenizers>=0.21.0
+bitsandbytes
 
 # --- LANGCHAIN STACK ---
-langchain
-langchain-community
-langchain-core
-langchain-classic
-langchain-astradb
-langchain-groq
-langchain-huggingface
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-core>=0.3.0
+langchain-classic>=1.0.0
+langchain-huggingface>=0.1.2
+langchain-qdrant>=0.2.0
+langchain-ollama>=1.1.0 
 
 # --- DOCUMENT PROCESSING (UNSTRUCTURED) ---
-unstructured
-unstructured[pdf]
-untructured-pytesseract
-unstructured-inference
-pdfminer.six
-pi-heif
+unstructured>=0.16.0
+unstructured[pdf]>=0.16.0
+unstructured-pytesseract>=0.3.13
+unstructured-inference>=0.8.0
+pdfminer.six>=20240706
+pi-heif>=0.18.0
 pillow>=11.1.0
-pytesseract
-pdf2image
+pytesseract>=0.3.13
+pdf2image>=1.17.0
+pypdf>=5.0.0
+opencv-python-headless>=4.10.0.84
+onnx>=1.16.0
+onnxruntime>=1.18.0
 
-# --- MULTIMODAL (QWEN2-VL) ---
-transformers
-qwen_vl_utils
+# --- VECTOR DATABASE / RETRIEVAL / INDEXING ---
+qdrant-client>=1.12.0
+rank-bm25>=0.2.2
+
+# --- MULTIMODAL (QWEN2-VL / QWEN2.5-VL) ---
+# Import name is qwen_vl_utils, but the pip package name is qwen-vl-utils.
+qwen-vl-utils[decord]==0.0.8
+decord>=0.6.0
 
 # --- JUPYTER SUPPORT ---
-ipykernel
-
-# --- INDEXING ---
-rank_mb25
+ipykernel>=6.29.0
+jupyter>=1.1.1
+ipywidgets>=8.1.0
 
 # --- TESTING ---
-pytest
-
-#
+pytest>=8.0.0
