@@ -3,9 +3,12 @@
 
 # Re-include content folder
 !content/
+!InternVideo/
+
 
 # Re-include everything inside content
 !content/**
+!InternVideo/**
 
 # Ignore common Python artifacts
 *.pyc
