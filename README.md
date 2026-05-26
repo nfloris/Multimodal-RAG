@@ -122,31 +122,143 @@ External tools:
 - ffmpeg, for audio/video decoding and video audio extraction
 - Ollama, optional, for local text generation
 
-## Environment Setup
+## General Setup Flow
 
-Create and activate a virtual environment:
+### 1. Clone the Repository
 
 ```bash
-python -m venv venv
+git clone https://github.com/theserenecoder/MultiModel_RAG
+cd MultiModel_RAG
 ```
 
-On Windows PowerShell:
+If your local folder is named `Multimodal-RAG`, use that folder name instead in
+the `cd` command.
+
+### 2. Create a Virtual Environment
+
+Windows:
 
 ```powershell
+py -3.11 -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
-On Linux or WSL:
+Windows Command Prompt:
+
+```bat
+py -3.11 -m venv venv
+venv\Scripts\activate.bat
+```
+
+Linux, macOS, or WSL:
 
 ```bash
+python3.11 -m venv venv
 source venv/bin/activate
 ```
 
-Install dependencies:
+### 3. Install Python Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+
+If you are only testing a small subset and do not want to use the full
+`requirements.txt`, install the relevant packages manually. For example:
+
+```bash
+pip install python-dotenv unstructured pypdf pdf2image pytesseract \
+  transformers sentence-transformers qdrant-client langchain \
+  langchain-qdrant langchain-ollama bert-score ipywidgets
+```
+
+The full pipeline notebooks need the complete `requirements.txt`.
+
+### 4. Pre-Download Hugging Face Models
+
+The repository includes `download_hf_models.py`, which pre-caches common
+Hugging Face models used by the notebooks. This is optional, but useful before
+long notebook runs because it separates model downloads from execution.
+
+Download the default open models:
+
+```bash
+python download_hf_models.py --profile defaults
+```
+
+Download a broader set of open model options:
+
+```bash
+python download_hf_models.py --profile all-open
+```
+
+For gated models, log in first and pass the gated option:
+
+```bash
+huggingface-cli login
+python download_hf_models.py --profile all --include-gated
+```
+
+### 5. Install External Dependencies
+
+Poppler is required by `unstructured` and `pdf2image` for PDF processing.
+
+On Windows:
+
+- Download Poppler from `https://github.com/oschwartz10612/poppler-windows/releases`.
+- Extract it.
+- Add the extracted `bin` directory to your system `PATH`.
+
+Tesseract OCR is required by `unstructured` for OCR-heavy PDFs.
+
+On Windows:
+
+- Download Tesseract from `https://github.com/UB-Mannheim/tesseract/wiki`.
+- Install it.
+- Add the install directory, usually `C:\Program Files\Tesseract-OCR`, to your
+  system `PATH`.
+
+On Ubuntu or WSL:
+
+```bash
+sudo apt update
+sudo apt install -y poppler-utils tesseract-ocr ffmpeg
+```
+
+`ffmpeg` is required for video audio extraction and is recommended for robust
+audio decoding.
+
+### 6. Set Up Qdrant
+
+Qdrant is used as the local vector database for embeddings.
+
+From the repository root on Linux or WSL:
+
+```bash
+docker run -d --name qdrant -p 6333:6333 -p 6334:6334 \
+  -v "$(pwd)/qdrant_storage:/qdrant/storage" qdrant/qdrant
+```
+
+From Windows PowerShell:
+
+```powershell
+docker run -d --name qdrant -p 6333:6333 -p 6334:6334 `
+  -v ${PWD}/qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+
+REST dashboard:
+
+```text
+http://localhost:6333/dashboard
+```
+
+If the container already exists, start it with:
+
+```bash
+docker start qdrant
+```
+
+### 7. Configure Optional Environment Variables
 
 Optional configuration can be placed in `setup.env`. The notebooks load this
 file with `python-dotenv`.
