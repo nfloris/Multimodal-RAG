@@ -1,16 +1,14 @@
-# Ignore all directories
-*/
+# Virtual environments
+venv/
+.venv/
 
-# Re-include content folder
-!content/
-!InternVideo/
+# Pipeline caches
+audio_pipeline/**/cache/
+image_pipeline/**/cache/
+video_pipeline/**/cache/
 
-
-# Re-include everything inside content
-!content/**
-!InternVideo/**
-
-# Ignore common Python artifacts
-*.pyc
+# Python and Jupyter artifacts
 __pycache__/
+*.py[cod]
+*$py.class
 .ipynb_checkpoints/
