@@ -50,7 +50,7 @@ Git ignores the `cache/` directories and local virtual environments.
 Folder: `image_pipeline/`
 Notebook: `rag_pipeline_imgs.ipynb`
 
-![Pipeline](images/rag_image)
+![Pipeline](images/mrr1.jpg)
 
 This pipeline processes PDFs containing text, tables, charts, diagrams, and
 images. It compares two core retrieval strategies:
@@ -62,7 +62,7 @@ images. It compares two core retrieval strategies:
   - *Without source linking*: only the VLM summary is used, both for
     retrieval and generation.
 
-  ![Comparison](images/rag_image_modalities)
+  ![Comparison](images/mrr2.jpg)
 
 - **CLIP shared text-image embedding** (shared semantic space): text chunks
   and images are embedded directly into a joint vector space, with no intermediate summarization step.
@@ -86,6 +86,8 @@ This pipeline compares two audio RAG strategies:
   as timestamped text.
 - CLAP audio-text RAG: raw audio segments and text queries are embedded in a
   shared CLAP space, with Whisper transcripts used as LLM context.
+
+![Pipeline audio](images/mrr3.jpg)
 
 The evaluation includes BERTScore, precision, recall, context recall, timestamp
 coverage, and must/should claim recall.
