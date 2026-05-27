@@ -23,6 +23,8 @@ The audio pipeline implements two main approaches:
   - Retrieves audio segments directly, then uses the attached Whisper transcript as LLM context.
   - Supports dense CLAP retrieval and optional transcript reranking. BM25 is intentionally not treated as a CLAP retrieval mode.
 
+<center><img src="../images/mmr3.jpg" alt="Text + audio pipeline" width="75%"></center>
+
 The final evaluation section computes:
 
 - BERTScore
