@@ -6,6 +6,8 @@ This folder contains the notebook:
 
 It builds and evaluates a multimodal RAG pipeline for PDF documents that contain text, tables, charts, diagrams, and other visual elements.
 
+<img src="../images/mmr1.jpg" alt="Text + image pipeline" width="75%">
+
 ## What It Does
 
 The image pipeline compares multiple RAG strategies for document understanding:
@@ -19,6 +21,8 @@ The image pipeline compares multiple RAG strategies for document understanding:
 - Generates final answers with either a local Hugging Face model or Ollama.
 - Evaluates RAG approaches with BERTScore, precision, recall, context recall, visual claim recall, and must/should claim recall.
 - Provides an interactive evaluation table that filters cached evaluation results without regenerating answers.
+
+<img src="../images/mmr2.jpg" alt="Modalities" width="75%">
 
 ## Inputs and Outputs
 
