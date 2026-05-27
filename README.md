@@ -9,10 +9,10 @@ This repository contains three local multimodal RAG pipelines for images/PDFs,
 audio, and video, each implemented as a Jupyter notebook. Two retrieval
 strategies are compared across all pipelines:
 
-- **Shared semantic space** — query and source modality are projected into the
+- *Shared semantic space* — query and source modality are projected into the
   same vector space.
 
-- **Unified translation** — each modality is first converted to text, then
+- *Unified translation* — each modality is first converted to text, then
   embedded with a text model. Retrieval operates entirely in text space.
 
 Comparing these two strategies across modalities is the core experimental
@@ -111,7 +111,7 @@ coverage, and must/should claim recall.
 
 <img src="images/mmr4.jpg" alt="Text + video pipeline" width="75%">
 
-Important: run the full video pipeline on Linux or WSL. Native Windows is not
+**Important**: run the full video pipeline on Linux or WSL. Native Windows is not
 supported for the complete InternVideo2 workflow because InternVideo2 and
 related video dependencies are unreliable or broken in this setup.
 
