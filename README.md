@@ -50,7 +50,7 @@ Git ignores the `cache/` directories and local virtual environments.
 Folder: `image_pipeline/`
 Notebook: `rag_pipeline_imgs.ipynb`
 
-![Pipeline](images/mmr1.jpg)
+<img src="images/mmr1.jpg" alt="Text + image pipeline" width="75%">
 
 This pipeline processes PDFs containing text, tables, charts, diagrams, and
 images. It compares two core retrieval strategies:
@@ -62,7 +62,7 @@ images. It compares two core retrieval strategies:
   - *Without source linking*: only the VLM summary is used, both for
     retrieval and generation.
 
-  ![Comparison](images/mmr2.jpg)
+  <img src="images/mmr2.jpg" alt="image + text: strategy comparison" width="75%">
 
 - **CLIP shared text-image embedding** (shared semantic space): text chunks
   and images are embedded directly into a joint vector space, with no intermediate summarization step.
@@ -87,7 +87,7 @@ This pipeline compares two audio RAG strategies:
 - CLAP audio-text RAG: raw audio segments and text queries are embedded in a
   shared CLAP space, with Whisper transcripts used as LLM context.
 
-![Pipeline audio](images/mmr3.jpg)
+<img src="images/mmr3.jpg" alt="Text + audio pipeline" width="75%">
 
 The evaluation includes BERTScore, precision, recall, context recall, timestamp
 coverage, and must/should claim recall.
@@ -108,6 +108,8 @@ This pipeline compares:
 
 The evaluation includes BERTScore, precision, recall, context recall, evidence
 coverage, and must/should claim recall.
+
+<img src="images/mmr4.jpg" alt="Text + video pipeline" width="75%">
 
 Important: run the full video pipeline on Linux or WSL. Native Windows is not
 supported for the complete InternVideo2 workflow because InternVideo2 and
