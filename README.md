@@ -1,8 +1,22 @@
+> This project explores multimodal Retrieval-Augmented Generation locally,
+> without relying on external APIs, comparing retrieval strategies across
+> modalities and measuring their impact on answer quality through a structured
+> evaluation framework.
+
 # Multimodal RAG Pipelines
 
-This repository contains three local multimodal Retrieval-Augmented Generation
-(RAG) pipelines for images/PDFs, audio, and video. Each pipeline is implemented
-as a Jupyter notebook and has its own README with pipeline-specific details.
+This repository contains three local multimodal RAG pipelines for images/PDFs,
+audio, and video, each implemented as a Jupyter notebook. Two retrieval
+strategies are compared across all pipelines:
+
+- **Shared semantic space** — query and source modality are projected into the
+  same vector space.
+
+- **Unified translation** — each modality is first converted to text, then
+  embedded with a text model. Retrieval operates entirely in text space.
+
+Comparing these two strategies across modalities is the core experimental
+question of this repository.
 
 ## Repository Structure
 
@@ -33,20 +47,30 @@ The `cache/` directories and local virtual environments are ignored by git.
 ## Pipelines
 
 ### Image Pipeline
-
 Folder: `image_pipeline/`
-
 Notebook: `rag_pipeline_imgs.ipynb`
 
-This pipeline processes PDFs containing text, tables, charts, diagrams, and
-images. It compares:
+![Pipeline](rag_image)
 
-- VLM image/table summarization plus text embedding retrieval.
-- CLIP shared text-image embedding retrieval.
-- Dense retrieval, BM25, hybrid retrieval, and cross-encoder reranking.
-- Answer generation with local Hugging Face models or Ollama.
-- Evaluation with BERTScore, precision, recall, context recall, visual claim
-  recall, and must/should claim recall.
+This pipeline processes PDFs containing text, tables, charts, diagrams, and
+images. It compares two core retrieval strategies:
+
+- **VLM summarization + text embedding**: images and
+  tables are summarized by a VLM, and the resulting text is embedded. Two sub-modes are evaluated:
+  - *With source linking*: the original image is also passed to the LLM at
+    generation time alongside its summary.
+  - *Without source linking*: only the VLM summary is used, both for
+    retrieval and generation.
+
+  ![Comparison](rag_image_modalities)
+
+- **CLIP shared text-image embedding** (shared semantic space): text chunks
+  and images are embedded directly into a joint vector space, with no intermediate summarization step.
+
+Both strategies are combined with dense retrieval, BM25, hybrid retrieval,
+and cross-encoder reranking. Answer generation uses local Hugging Face models
+or Ollama. Evaluation covers BERTScore, must/should claim recall, visual claim
+recall, and context recall.
 
 See `image_pipeline/README.md` for details.
 
