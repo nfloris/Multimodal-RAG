@@ -42,7 +42,7 @@ Multimodal-RAG/
 +-- qdrant_storage/
 ```
 
-The `cache/` directories and local virtual environments are ignored by git.
+Git ignores the `cache/` directories and local virtual environments.
 
 ## Pipelines
 
@@ -50,7 +50,7 @@ The `cache/` directories and local virtual environments are ignored by git.
 Folder: `image_pipeline/`
 Notebook: `rag_pipeline_imgs.ipynb`
 
-![Pipeline](rag_image)
+![Pipeline](images/rag_image)
 
 This pipeline processes PDFs containing text, tables, charts, diagrams, and
 images. It compares two core retrieval strategies:
@@ -62,7 +62,7 @@ images. It compares two core retrieval strategies:
   - *Without source linking*: only the VLM summary is used, both for
     retrieval and generation.
 
-  ![Comparison](rag_image_modalities)
+  ![Comparison](images/rag_image_modalities)
 
 - **CLIP shared text-image embedding** (shared semantic space): text chunks
   and images are embedded directly into a joint vector space, with no intermediate summarization step.
