@@ -25,7 +25,8 @@ The video pipeline contains two complementary approaches:
   - Aligns frame summaries with transcript windows.
   - Embeds the combined `VISION + TRANSCRIPT` text with BGE-M3.
   - Retrieves with dense search, BM25, hybrid search, and optional cross-encoder reranking.
-
+  
+<center><img src="../images/mmr4.jpg" alt="Text + video pipeline" width="75%"></center>
 The final evaluation section computes:
 
 - BERTScore
