@@ -17,12 +17,20 @@ from huggingface_hub import snapshot_download
 DEFAULT_MODELS = [
     # Text summarization
     "Qwen/Qwen2.5-1.5B-Instruct",
+    "Qwen/Qwen2.5-3B-Instruct",
     # Image/table summarization + multimodal generation
     "Qwen/Qwen2.5-VL-3B-Instruct",
     # Embeddings
     "BAAI/bge-m3",
     # Reranking
     "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    # Audio
+    "laion/larger_clap_general",
+    "deepdml/faster-whisper-large-v3-turbo-ct2",
+    "openai/whisper-large-v3",
+    # Evaluation
+    "distilbert-base-uncased",
 ]
 
 ALL_OPEN_MODELS = [
@@ -42,6 +50,21 @@ ALL_OPEN_MODELS = [
 
     # Reranker
     "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "cross-encoder/ms-marco-MiniLM-L-6-v2",
+
+    # Audio
+    "laion/larger_clap_general",
+    "laion/larger_clap_music",
+    "laion/clap-htsat-unfused",
+    "deepdml/faster-whisper-large-v3-turbo-ct2",
+    "openai/whisper-large-v3",
+
+    # Evaluation
+    "distilbert-base-uncased",
+
+    # Video
+    "OpenGVLab/InternVideo2-Stage2_1B-224p-f4",
+    "OpenGVLab/InternVideo2_CLIP_S",
 
     # Generator
     "meta-llama/Llama-3.1-8B-Instruct",

@@ -1,8 +1,22 @@
+> This project explores multimodal Retrieval-Augmented Generation locally,
+> without relying on external APIs, comparing retrieval strategies across
+> modalities and measuring their impact on answer quality through a structured
+> evaluation framework.
+
 # Multimodal RAG Pipelines
 
-This repository contains three local multimodal Retrieval-Augmented Generation
-(RAG) pipelines for images/PDFs, audio, and video. Each pipeline is implemented
-as a Jupyter notebook and has its own README with pipeline-specific details.
+This repository contains three local multimodal RAG pipelines for images/PDFs,
+audio, and video, each implemented as a Jupyter notebook. Two retrieval
+strategies are compared across all pipelines:
+
+- *Shared vector space* — query and source modality are projected into the
+  same vector space.
+
+- *Unified translation* — each modality is first converted to text, then
+  embedded with a text model. Retrieval operates entirely in text space.
+
+Comparing these two strategies across modalities is the core experimental
+question of this repository.
 
 ## Repository Structure
 
@@ -28,25 +42,35 @@ Multimodal-RAG/
 +-- qdrant_storage/
 ```
 
-The `cache/` directories and local virtual environments are ignored by git.
+Git ignores the `cache/` directories and local virtual environments.
 
 ## Pipelines
 
 ### Image Pipeline
-
 Folder: `image_pipeline/`
-
 Notebook: `rag_pipeline_imgs.ipynb`
 
-This pipeline processes PDFs containing text, tables, charts, diagrams, and
-images. It compares:
+<img src="images/mmr1.jpg" alt="Text + image pipeline" width="75%">
 
-- VLM image/table summarization plus text embedding retrieval.
-- CLIP shared text-image embedding retrieval.
-- Dense retrieval, BM25, hybrid retrieval, and cross-encoder reranking.
-- Answer generation with local Hugging Face models or Ollama.
-- Evaluation with BERTScore, precision, recall, context recall, visual claim
-  recall, and must/should claim recall.
+This pipeline processes PDFs containing text, tables, charts, diagrams, and
+images. It compares two core retrieval strategies:
+
+- **VLM summarization + text embedding**: images and
+  tables are summarized by a VLM, and the resulting text is embedded. Two sub-modes are evaluated:
+  - *With source linking*: the original image is also passed to the LLM at
+    generation time alongside its summary.
+  - *Without source linking*: only the VLM summary is used, both for
+    retrieval and generation.
+
+  <img src="images/mmr2.jpg" alt="image + text: strategy comparison" width="75%">
+
+- **CLIP shared text-image embedding** (shared vector space): text chunks
+  and images are embedded directly into a joint vector space, with no intermediate summarization step.
+
+Both strategies are combined with dense retrieval, BM25, hybrid retrieval,
+and cross-encoder reranking. Answer generation uses local Hugging Face models
+or Ollama. Evaluation covers BERTScore, must/should claim recall, visual claim
+recall, and context recall.
 
 See `image_pipeline/README.md` for details.
 
@@ -62,6 +86,8 @@ This pipeline compares two audio RAG strategies:
   as timestamped text.
 - CLAP audio-text RAG: raw audio segments and text queries are embedded in a
   shared CLAP space, with Whisper transcripts used as LLM context.
+
+<img src="images/mmr3.jpg" alt="Text + audio pipeline" width="75%">
 
 The evaluation includes BERTScore, precision, recall, context recall, timestamp
 coverage, and must/should claim recall.
@@ -83,17 +109,15 @@ This pipeline compares:
 The evaluation includes BERTScore, precision, recall, context recall, evidence
 coverage, and must/should claim recall.
 
-Important: run the full video pipeline on Linux or WSL. Native Windows is not
-supported for the complete InternVideo2 workflow because InternVideo2 and
-related video dependencies are unreliable or broken in this setup.
+<img src="images/mmr4.jpg" alt="Text + video pipeline" width="75%">
+
+**Important**: run the full video pipeline on Linux or WSL. Native Windows is not supported for the complete InternVideo2 workflow because InternVideo2 and related video dependencies are unreliable or broken in this setup.
 
 See `video_pipeline/README.md` for details.
 
 ## Requirements
 
-Use Python 3.10 or 3.11. A CUDA-capable GPU is strongly recommended for the
-full notebooks, especially Qwen2.5-VL, CLIP, CLAP, Whisper, InternVideo2,
-BGE-M3, and cross-encoder reranking.
+Use Python 3.10 or 3.11. A CUDA-capable GPU is strongly recommended for the full notebooks, especially Qwen2.5-VL, CLIP, CLAP, Whisper, InternVideo2, BGE-M3, and cross-encoder reranking.
 
 Install Python dependencies from the repository root:
 
@@ -160,7 +184,14 @@ source venv/bin/activate
 ### 3. Install Python Dependencies
 
 ```bash
-pip install -r requirements.txt
+python -m pip install --upgrade pip setuptools wheel
+
+python -m pip install --index-url https://download.pytorch.org/whl/cu121 `
+  torch==2.5.1+cu121 `
+  torchvision==0.20.1+cu121 `
+  torchaudio==2.5.1+cu121
+
+python -m pip install -r requirements.txt
 ```
 
 If you are only testing a small subset and do not want to use the full
@@ -281,7 +312,7 @@ OLLAMA_BASE_URL=http://172.28.16.1:11434
 ```
 
 Keep `OLLAMA_HOST` and `OLLAMA_BASE_URL` separate: `OLLAMA_HOST` controls where
-the Ollama server listens, while `OLLAMA_BASE_URL` is the URL the Python client
+the Ollama server listens, while `OLLAMA_BASE_URL` is the URL of the Python client
 connects to.
 
 ## Start Qdrant
