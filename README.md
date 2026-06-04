@@ -9,7 +9,7 @@ This repository contains three local multimodal RAG pipelines for images/PDFs,
 audio, and video, each implemented as a Jupyter notebook. Two retrieval
 strategies are compared across all pipelines:
 
-- *Shared semantic space* — query and source modality are projected into the
+- *Shared vector space* — query and source modality are projected into the
   same vector space.
 
 - *Unified translation* — each modality is first converted to text, then
@@ -64,7 +64,7 @@ images. It compares two core retrieval strategies:
 
   <img src="images/mmr2.jpg" alt="image + text: strategy comparison" width="75%">
 
-- **CLIP shared text-image embedding** (shared semantic space): text chunks
+- **CLIP shared text-image embedding** (shared vector space): text chunks
   and images are embedded directly into a joint vector space, with no intermediate summarization step.
 
 Both strategies are combined with dense retrieval, BM25, hybrid retrieval,
@@ -111,17 +111,13 @@ coverage, and must/should claim recall.
 
 <img src="images/mmr4.jpg" alt="Text + video pipeline" width="75%">
 
-**Important**: run the full video pipeline on Linux or WSL. Native Windows is not
-supported for the complete InternVideo2 workflow because InternVideo2 and
-related video dependencies are unreliable or broken in this setup.
+**Important**: run the full video pipeline on Linux or WSL. Native Windows is not supported for the complete InternVideo2 workflow because InternVideo2 and related video dependencies are unreliable or broken in this setup.
 
 See `video_pipeline/README.md` for details.
 
 ## Requirements
 
-Use Python 3.10 or 3.11. A CUDA-capable GPU is strongly recommended for the
-full notebooks, especially Qwen2.5-VL, CLIP, CLAP, Whisper, InternVideo2,
-BGE-M3, and cross-encoder reranking.
+Use Python 3.10 or 3.11. A CUDA-capable GPU is strongly recommended for the full notebooks, especially Qwen2.5-VL, CLIP, CLAP, Whisper, InternVideo2, BGE-M3, and cross-encoder reranking.
 
 Install Python dependencies from the repository root:
 
@@ -309,7 +305,7 @@ OLLAMA_BASE_URL=http://172.28.16.1:11434
 ```
 
 Keep `OLLAMA_HOST` and `OLLAMA_BASE_URL` separate: `OLLAMA_HOST` controls where
-the Ollama server listens, while `OLLAMA_BASE_URL` is the URL the Python client
+the Ollama server listens, while `OLLAMA_BASE_URL` is the URL of the Python client
 connects to.
 
 ## Start Qdrant
