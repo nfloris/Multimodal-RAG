@@ -41,7 +41,14 @@ Concretely the notebook:
 Install the shared Python dependencies from the repository root:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install --upgrade pip setuptools wheel
+
+python -m pip install --index-url https://download.pytorch.org/whl/cu121 `
+  torch==2.5.1+cu121 `
+  torchvision==0.20.1+cu121 `
+  torchaudio==2.5.1+cu121
+
+python -m pip install -r requirements.txt
 ```
 
 Main Python packages used by this pipeline:
