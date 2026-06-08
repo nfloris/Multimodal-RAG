@@ -119,12 +119,6 @@ See `video_pipeline/README.md` for details.
 
 Use Python 3.10 or 3.11. A CUDA-capable GPU is strongly recommended for the full notebooks, especially Qwen2.5-VL, CLIP, CLAP, Whisper, InternVideo2, BGE-M3, and cross-encoder reranking.
 
-Install Python dependencies from the repository root:
-
-```bash
-pip install -r requirements.txt
-```
-
 Main dependency groups include:
 
 - Parsing and PDF extraction: `unstructured`, `pdfminer.six`, `pdf2image`,
